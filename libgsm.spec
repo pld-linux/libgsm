@@ -4,8 +4,7 @@ Version:	1.0.10
 Release:	1
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
 Patch0:		gsm-1.0.9-makefile.patch
-Group:		Librarites
-######		Unknown group!
+Group:		Libraries
 Copyright:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
