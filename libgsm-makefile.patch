@@ -141,13 +141,13 @@
  $(TOAST_INSTALL_BIN)/untoast:	$(TOAST_INSTALL_BIN)/toast
 -		-rm $@
 -		ln $? $@
-+		ln -sf untoast $@
++		ln -sf toast $@
  
 -$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
 -		-rm $@
 -		ln $? $@
-+$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/tcat
-+		ln -sf tcat $@
++$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
++		ln -sf toast $@
  
  $(TOAST_INSTALL_MAN)/toast.1:	$(MAN)/toast.1
 -		-rm $@
