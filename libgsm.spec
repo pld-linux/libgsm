@@ -5,6 +5,7 @@ Release:	2
 Copyright:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
+Group(de):	Libraries
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
@@ -22,30 +23,32 @@ audio over the Internet.
 Summary:	Header files and development documentation for libgsm
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do libgsm
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
-Header files and development documentation for libgsm
+Header files and development documentation for libgsm.
 
 %package static
 Summary:	GSM Audio Encoding/decoding static library
 Summary(pl):	Statyczna biblioteka GSM Audio
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
-GSM Audio Encoding/decoding static library
+GSM Audio Encoding/decoding static library.
 
 %prep
 %setup -q -n gsm-1.0-pl10
 %patch0 -p1
 
 %build
-%{__make} OPTFLAGS="$RPM_OPT_FLAGS" WAV49="-DWAV49"
+%{__make} OPTFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" WAV49="-DWAV49"
 
 
 %install
@@ -57,8 +60,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,3},%{_includedir},%{_libd
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/tcat.1
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/untoast.1
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/*/* \
-	COPYRIGHT ChangeLog MACHINES MANIFEST README
+gzip -9nf COPYRIGHT ChangeLog MACHINES MANIFEST README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
