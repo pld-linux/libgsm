@@ -81,8 +81,6 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,3},%{_includedir},%{_libd
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/tcat.1
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/untoast.1
 
-gzip -9nf COPYRIGHT ChangeLog MACHINES MANIFEST README
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -91,7 +89,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz
+%doc COPYRIGHT ChangeLog MACHINES MANIFEST README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/libgsm.so.*.*
 %{_mandir}/man1/*
