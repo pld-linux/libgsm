@@ -2,7 +2,7 @@ Summary:	GSM audio encoding/decoding library
 Summary(pl):	Biblioteka koduj±ca/dekoduj±ca d¼wiêk GSM
 Name:		libgsm
 Version:	1.0.10
-Release:	5
+Release:	6
 License:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
