@@ -48,7 +48,7 @@ GSM Audio Encoding/decoding static library.
 %patch0 -p1
 
 %build
-%{__make} OPTFLAGS="%{!?debug:$RPM_OPT_FLAGS}%{?debug:-O -g}" WAV49="-DWAV49"
+%{__make} OPTFLAGS="%{?debug:-O -g}%{!?debug:$RPM_OPT_FLAGS}" WAV49="-DWAV49"
 
 
 %install
