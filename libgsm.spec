@@ -24,11 +24,29 @@ including 'rplay', but has never been packaged as a stand-alone shared
 library. GSM encoding has specific uses in transmission of packetized
 audio over the Internet.
 
+GSM 06.10 compresses frames of 160 13-bit samples (8 kHz sampling
+rate, i.e. a frame rate of 50 Hz) into 260 bits; for compatibility
+with typical UNIX applications, our implementation turns frames of 160
+16-bit linear samples into 33-byte frames (1650 Bytes/s). The quality
+of the algorithm is good enough for reliable speaker recognition; even
+music often survives transcoding in recognizable form (given the
+bandwidth limitations of 8 kHz sampling rate).
+
 %description -l pl
 To jest darmowa implementacja kodowania i dekodowania d¼wiêku GSM.
 Biblioteka jest u¿ywana w wielu projektach, m.in. rplay. Kodowanie GSM
 ma specyficzne zastosowani przy transmisji pakietowanego d¼wiêku przez
 Internet.
+
+GSM 06.10 dokonuje kompresji ramek 160 13-bitowych sampli (o
+o¶miokilohercowej czêstotliwo¶ci próbkowania, czyli czêstotliwo¶ci
+ramki 50 Hz) do 260 bitów; aby zachowaæ kompatybilno¶æ z typowymi
+aplikacjami uniksowymi, nasza implementacja zamienia ramki 160
+16-bitowych linearnych sampli w 33-bajtowe ramki (1650 bajtów/s).
+Algorytm jest na tyle dobry, ¿e mo¿na go wykorzystaæ do przekazywania
+mowy. Nawet muzyka czêsto pomy¶lnie przechodzi proces kodowania
+(wzi±wszy pod uwagê ograniczenia przepustowo¶ci osmiokilohercowej
+czêstotliwo¶ci próbkowania).
 
 %package devel
 Summary:	Header files and development documentation for libgsm
