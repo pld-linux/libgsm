@@ -122,7 +122,9 @@ Bibliotecas estáticas para desenvolvimento com libgsm
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,3},%{_includedir},%{_libdir}}
 
-%{__make} install INSTALL_ROOT=$RPM_BUILD_ROOT
+%{__make} install \
+	INSTALL_ROOT=$RPM_BUILD_ROOT \
+	GSM_INSTALL_LIB=$RPM_BUILD_ROOT%{_libdir}
 
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/tcat.1
 echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/untoast.1
