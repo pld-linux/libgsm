@@ -6,13 +6,6 @@ Release:	6
 License:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -52,13 +45,6 @@ czЙstotliwo╤ci prСbkowania).
 Summary:	Header files and development documentation for libgsm
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do libgsm
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -71,13 +57,6 @@ Pliki nagЁСwkowe i dokumentacja do libgsm.
 Summary:	GSM Audio Encoding/decoding static library
 Summary(pl):	Statyczna biblioteka GSM Audio
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
