@@ -3,7 +3,7 @@ Name:		libgsm
 Version:	1.0.10
 Release:	1
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
-Patch0:		gsm-1.0.9-makefile.patch
+Patch0:		%{name}-makefile.patch
 Group:		Libraries
 Copyright:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
@@ -21,25 +21,29 @@ audio over the Internet.
 %patch -p1
 
 %build
-%{__make} RPM_OPT_FLAGS="${RPM_OPT_FLAGS}"
+%{__make} OPTFLAGS="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d ${RPM_BUILD_ROOT}%{_prefix}/{bin,man/man{1,3},include,lib}
-%{__make} INSTALL_ROOT=${RPM_BUILD_ROOT}%{_prefix} install
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}/man{1,3},%{_includedir},%{_libdir}}
+
+%{__make} install INSTALL_ROOT=$RPM_BUILD_ROOT
+
+echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/tcat.1
+echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/untoast.1
+
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/*/* \
+	COPYRIGHT ChangeLog INSTALL MACHINES MANIFEST README
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT ChangeLog INSTALL MACHINES MANIFEST README
-%defattr(-,root,root)
-%attr(755,root,root) %{_bindir}/toast
-%attr(755,root,root) %{_bindir}/untoast
-%attr(755,root,root) %{_bindir}/tcat
-%{_prefix}/man/man3/*
-%{_includedir}/gsm.h
+%doc {COPYRIGHT,ChangeLog,INSTALL,MACHINES,MANIFEST,README}.gz
+%attr(755,root,root) %{_bindir}/*
+%{_mandir}/*/*
+%{_includedir}/*
 %{_libdir}/libgsm*
 
 %clean
