@@ -1,7 +1,7 @@
 Summary:	GSM audio encoding/decoding library
 Name:		libgsm
 Version:	1.0.10
-Release:	2
+Release:	3
 Copyright:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
@@ -13,7 +13,7 @@ Patch0:		%{name}-makefile.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-This is a free and public implimentation of GSM audio encoding and
+This is a free and public implementation of GSM audio encoding and
 decoding. The gsm library is used in many free software projects
 including 'rplay', but has never been packaged as a stand-alone shared
 libary. GSM encoding has specific uses in transmission of packetized
