@@ -1,8 +1,11 @@
 Summary:	GSM audio encoding/decoding library
 Summary(pl):	Biblioteka koduj╠ca/dekoduj╠ca d╪wiЙk GSM
+Summary(pt_BR):	Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM
+Summary(ru):	Библиотека аудио кодирования/декодирования GSM
+Summary(uk):	Б╕бл╕отека ауд╕о кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.10
-Release:	6
+Release:	7
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
@@ -40,9 +43,25 @@ mowy. Nawet muzyka czЙsto pomy╤lnie przechodzi proces kodowania
 (wzi╠wszy pod uwagЙ ograniczenia przepustowo╤ci osmiokilohercowej
 czЙstotliwo╤ci prСbkowania).
 
+%description -l pt_BR
+Esta И uma implementaГЦo pЗblica e livre da codificaГЦo GSM. A
+biblioteca gsm И usada por muitos programas de livre distribuiГЦo,
+entre eles o rplay.
+
+%description -l ru
+Это свободная реализация аудио кодирования/декодирования GSM.
+Кодирование GSM используется при передаче аудио через Интернет.
+
+%description -l uk
+Це в╕льна реал╕зац╕я ауд╕о кодування/декодування GSM. Кодування GSM
+використову╓ться при передач╕ ауд╕о через ╤нтернет.
+
 %package devel
 Summary:	Header files and development documentation for libgsm
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do libgsm
+Summary(pt_BR):	Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM - arquivos para desenvolvimento
+Summary(ru):	Файлы для разработки с использованием библиотеки libgsm
+Summary(uk):	Файли для розробки з використанням б╕бл╕отеки libgsm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
 
@@ -52,9 +71,24 @@ Header files and development documentation for libgsm.
 %description devel -l pl
 Pliki nagЁСwkowe i dokumentacja do libgsm.
 
+%description devel -l pt_BR
+Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM - arquivos para
+desenvolvimento
+
+%description devel -l ru
+Этот пакет содержит файлы, необходимые для разработки программ с
+использованием библиотеки libgsm.
+
+%description devel -l uk
+Цей пакет м╕стить файли, необх╕дн╕ для розробки програм з
+використанням б╕бл╕отеки libgsm.
+
 %package static
 Summary:	GSM Audio Encoding/decoding static library
 Summary(pl):	Statyczna biblioteka GSM Audio
+Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com a libgsm
+Summary(ru):	Статические библиотеки для разработки с использованием libgsm
+Summary(uk):	Статичн╕ б╕бл╕отеки для розробки з використанням libgsm
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 
@@ -63,6 +97,15 @@ GSM Audio Encoding/decoding static library.
 
 %description static -l pl
 Statyczna biblioteka GSM Audio.
+
+%description static -l pt_BR
+Bibliotecas estАticas para desenvolvimento com libgsm
+
+%description static -l ru
+Этот пакет содержит статические библиотеки для разработки программ.
+
+%description static -l uk
+Цей пакет м╕стить статичн╕ б╕б╕л╕отеки для розробки програм.
 
 %prep
 %setup -q -n gsm-1.0-pl10
