@@ -9,7 +9,7 @@ Release:	10
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
-# Source0-md5: 4b148480f82e96d274248e13880ec873
+# Source0-md5:	4b148480f82e96d274248e13880ec873
 Patch0:		%{name}-makefile.patch
 URL:		http://kbs.cs.tu-berlin.de/~jutta/toast.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
