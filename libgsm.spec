@@ -22,12 +22,12 @@ audio over the Internet.
 %patch -p1
 
 %build
-make RPM_OPT_FLAGS="${RPM_OPT_FLAGS}"
+%{__make} RPM_OPT_FLAGS="${RPM_OPT_FLAGS}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d ${RPM_BUILD_ROOT}%{_prefix}/{bin,man/man{1,3},include,lib}
-make INSTALL_ROOT=${RPM_BUILD_ROOT}%{_prefix} install
+%{__make} INSTALL_ROOT=${RPM_BUILD_ROOT}%{_prefix} install
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
