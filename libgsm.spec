@@ -16,6 +16,28 @@ including 'rplay', but has never been packaged as a stand-alone shared
 libary. GSM encoding has specific uses in transmission of packetized
 audio over the Internet.
 
+%package devel
+Summary:        Header files and development documentation for libgsm
+Summary(pl):    Pliki nag³ówkowe i dokumentacja do libgsm
+Group:          Development/Libraries
+Group(fr):      Development/Librairies
+Group(pl):      Programowanie/Biblioteki
+Requires:       %{name} = %{version}
+
+%description devel
+Header files and development documentation for libgsm
+
+%package static
+Summary:        GSM Audio Encoding/decoding static library
+Summary(pl):    Statyczna biblioteka GSM Audio
+Group:          Development/Libraries
+Group(fr):      Development/Librairies
+Group(pl):      Programowanie/Biblioteki
+Requires:       %{name}-devel = %{version}
+
+%description static
+GSM Audio Encoding/decoding static library
+
 %prep
 %setup -q -n gsm-1.0-pl10
 %patch -p1
@@ -35,6 +57,9 @@ echo .so toast.1 >$RPM_BUILD_ROOT%{_mandir}/man1/untoast.1
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/*/* \
 	COPYRIGHT ChangeLog INSTALL MACHINES MANIFEST README
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -42,9 +67,15 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/*/* \
 %defattr(644,root,root,755)
 %doc {COPYRIGHT,ChangeLog,INSTALL,MACHINES,MANIFEST,README}.gz
 %attr(755,root,root) %{_bindir}/*
-%{_mandir}/*/*
-%{_includedir}/*
-%{_libdir}/libgsm*
+%attr(755,root,root) %{_libdir}/libgsm.so.*.*
+%{_mandir}/man1/*
 
-%clean
-rm -rf ${RPM_BUILD_ROOT}
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libgsm.so
+%{_includedir}/*
+%{_mandir}/man3/*
+
+%files static
+%defattr(644,root,root,755)
+%{_libdir}/libgsm.a
