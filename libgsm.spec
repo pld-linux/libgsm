@@ -1,7 +1,7 @@
 Summary:	GSM audio encoding/decoding library
 Name:		libgsm
 Version:	1.0.10
-Release:	1
+Release:	2
 Copyright:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
@@ -45,7 +45,7 @@ GSM Audio Encoding/decoding static library
 %patch0 -p1
 
 %build
-%{__make} OPTFLAGS="$RPM_OPT_FLAGS"
+%{__make} OPTFLAGS="$RPM_OPT_FLAGS" WAV49="-DWAV49"
 
 
 %install
