@@ -4,7 +4,6 @@ Name:		libgsm
 Version:	1.0.10
 Release:	6
 License:	Free (Copyright (C) Technische Universitaet Berlin)
-Vendor:		Tycho Softworks
 Group:		Libraries
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
