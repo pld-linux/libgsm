@@ -1,6 +1,6 @@
 diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
 --- gsm-1.0-pl10.orig/Makefile	Tue Jul  2 16:36:06 1996
-+++ gsm-1.0-pl10/Makefile	Wed Aug 23 23:34:32 2000
++++ gsm-1.0-pl10/Makefile	Thu Aug 24 01:45:58 2000
 @@ -44,7 +44,7 @@
  # CCFLAGS 	= -c -O
  
@@ -15,7 +15,7 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  # this directory.
  
 -GSM_INSTALL_ROOT = $(INSTALL_ROOT)
-+GSM_INSTALL_ROOT = /usr
++GSM_INSTALL_ROOT = $(INSTALL_ROOT)/usr
  GSM_INSTALL_LIB = $(GSM_INSTALL_ROOT)/lib
 -GSM_INSTALL_INC = $(GSM_INSTALL_ROOT)/inc
 -GSM_INSTALL_MAN = $(GSM_INSTALL_ROOT)/man/man3
@@ -29,22 +29,51 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  # of this directory.
  
 -TOAST_INSTALL_ROOT	  = $(INSTALL_ROOT)
-+TOAST_INSTALL_ROOT = /usr
++TOAST_INSTALL_ROOT = $(INSTALL_ROOT)/usr
  TOAST_INSTALL_BIN = $(TOAST_INSTALL_ROOT)/bin
 -TOAST_INSTALL_MAN = $(TOAST_INSTALL_ROOT)/man/man1
 +TOAST_INSTALL_MAN = $(TOAST_INSTALL_ROOT)/share/man/man1
  
  #  Other tools
  
-@@ -300,7 +300,6 @@
+@@ -140,6 +140,7 @@
+ # Targets
+ 
+ LIBGSM	= $(LIB)/libgsm.a
++LIBGSMSO= $(LIB)/libgsm.so
+ 
+ TOAST	= $(BIN)/toast
+ UNTOAST	= $(BIN)/untoast
+@@ -258,6 +259,7 @@
+ 
+ GSM_INSTALL_TARGETS =	\
+ 		$(GSM_INSTALL_LIB)/libgsm.a		\
++		$(GSM_INSTALL_LIB)/libgsm.so.1.0.10	\
+ 		$(GSM_INSTALL_INC)/gsm.h		\
+ 		$(GSM_INSTALL_MAN)/gsm.3		\
+ 		$(GSM_INSTALL_MAN)/gsm_explode.3	\
+@@ -279,7 +281,7 @@
+ 
+ # Target rules
+ 
+-all:		$(LIBGSM) $(TOAST) $(TCAT) $(UNTOAST)
++all:		$(LIBGSM) $(LIBGSMSO) $(TOAST) $(TCAT) $(UNTOAST)
+ 		@-echo $(ROOT): Done.
+ 
+ tst:		$(TST)/lin2cod $(TST)/cod2lin $(TOAST) $(TST)/test-result
+@@ -298,9 +300,10 @@
+ 
+ 
  # The basic API: libgsm
++$(LIBGSMSO):   $(LIB) $(GSM_OBJECTS)
++		ld -o $@.1.0.10 -shared -soname libgsm.so.1 $(GSM_OBJECTS)
  
  $(LIBGSM):	$(LIB) $(GSM_OBJECTS)
 -		-rm $(RMFLAGS) $(LIBGSM)
  		$(AR) $(ARFLAGS) $(LIBGSM) $(GSM_OBJECTS)
  		$(RANLIB) $(LIBGSM)
  
-@@ -311,11 +310,9 @@
+@@ -311,11 +314,9 @@
  		$(LD) $(LFLAGS) -o $(TOAST) $(TOAST_OBJECTS) $(LIBGSM) $(LDLIB)
  
  $(UNTOAST):	$(BIN) $(TOAST)
@@ -56,74 +85,64 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  		$(LN) $(TOAST) $(TCAT)
  
  
-@@ -351,52 +348,42 @@
+@@ -351,53 +352,47 @@
  		fi
  
  $(TOAST_INSTALL_BIN)/toast:	$(TOAST)
 -		-rm $@
--		cp $(TOAST) $@
--		chmod 755 $@
-+		cp $(TOAST) $(INSTALL_ROOT)$@
-+		chmod 755 $(INSTALL_ROOT)$@
+ 		cp $(TOAST) $@
+ 		chmod 755 $@
  
  $(TOAST_INSTALL_BIN)/untoast:	$(TOAST_INSTALL_BIN)/toast
 -		-rm $@
 -		ln $? $@
-+		ln -sf $? $(INSTALL_ROOT)$@
++		ln -sf untoast $@
  
- $(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
+-$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
 -		-rm $@
 -		ln $? $@
-+		ln -sf $? $(INSTALL_ROOT)$@
++$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/tcat
++		ln -sf tcat $@
  
  $(TOAST_INSTALL_MAN)/toast.1:	$(MAN)/toast.1
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm.3:	$(MAN)/gsm.3
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_option.3:	$(MAN)/gsm_option.3
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_explode.3:	$(MAN)/gsm_explode.3
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_print.3:	$(MAN)/gsm_print.3
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_INC)/gsm.h:	$(INC)/gsm.h
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
  $(GSM_INSTALL_LIB)/libgsm.a:	$(LIBGSM)
 -		-rm $@
--		cp $? $@
--		chmod 444 $@
-+		cp $? $(INSTALL_ROOT)$@
-+		chmod 444 $(INSTALL_ROOT)$@
+ 		cp $? $@
+ 		chmod 444 $@
  
++$(GSM_INSTALL_LIB)/libgsm.so.1.0.10: $(LIBGSMSO).1.0.10
++		cp $? $@
++		ln -sf libgsm.so.1.0.10 $(GSM_INSTALL_LIB)/libgsm.so.1
++		ln -sf libgsm.so.1.0.10 $(GSM_INSTALL_LIB)/libgsm.so
  
  # Distribution
+ 
