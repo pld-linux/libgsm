@@ -1,16 +1,23 @@
-diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
---- gsm-1.0-pl10.orig/Makefile	Tue Jul  2 16:36:06 1996
-+++ gsm-1.0-pl10/Makefile	Thu Aug 24 01:45:58 2000
+--- gsm-1.0-pl10/Makefile.wiget	Tue Jul  2 16:36:06 1996
++++ gsm-1.0-pl10/Makefile	Tue Aug 29 13:37:15 2000
 @@ -44,7 +44,7 @@
  # CCFLAGS 	= -c -O
  
  CC		= gcc -ansi -pedantic
 -CCFLAGS 	= -c -O2 -DNeedFunctionPrototypes=1
-+CCFLAGS 	= $(OPTFLAGS) -c -DNeedFunctionPrototypes=1
++CCFLAGS 	= $(OPTFLAGS) -DNeedFunctionPrototypes=1
  
  LD 		= $(CC)
  
-@@ -78,10 +78,10 @@
+@@ -64,6 +64,7 @@
+ # LDLIB	= -lgcc
+ ######### Additional libraries needed by $(LD)
+ 
++PICFLAGS = -fPIC
+ 
+ # Where do you want to install libraries, binaries, a header file
+ # and the manual pages?
+@@ -78,10 +79,10 @@
  # Leave GSM_INSTALL_ROOT empty to not install the GSM library outside of
  # this directory.
  
@@ -24,7 +31,7 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  
  
  # Where do you want to install the toast binaries and their manpage?
-@@ -89,9 +89,9 @@
+@@ -89,12 +90,13 @@
  # Leave TOAST_INSTALL_ROOT empty to not install the toast binaries outside
  # of this directory.
  
@@ -36,7 +43,11 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  
  #  Other tools
  
-@@ -140,6 +140,7 @@
++MV		= mv
+ SHELL		= /bin/sh
+ LN		= ln
+ BASENAME 	= basename
+@@ -140,6 +142,7 @@
  # Targets
  
  LIBGSM	= $(LIB)/libgsm.a
@@ -44,7 +55,16 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  
  TOAST	= $(BIN)/toast
  UNTOAST	= $(BIN)/untoast
-@@ -258,6 +259,7 @@
+@@ -222,6 +225,8 @@
+ 		$(SRC)/short_term.o	\
+ 		$(SRC)/table.o
+ 
++GSM_SHOBJECTS = $(foreach OBJX,$(GSM_OBJECTS),$(patsubst $(SRC)/%,shared/%,$(OBJX)))
++
+ TOAST_OBJECTS =	$(SRC)/toast.o 		\
+ 		$(SRC)/toast_lin.o	\
+ 		$(SRC)/toast_ulaw.o	\
+@@ -258,6 +263,7 @@
  
  GSM_INSTALL_TARGETS =	\
  		$(GSM_INSTALL_LIB)/libgsm.a		\
@@ -52,7 +72,14 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  		$(GSM_INSTALL_INC)/gsm.h		\
  		$(GSM_INSTALL_MAN)/gsm.3		\
  		$(GSM_INSTALL_MAN)/gsm_explode.3	\
-@@ -279,7 +281,7 @@
+@@ -274,12 +280,12 @@
+ # Default rules
+ 
+ .c.o:
+-		$(CC) $(CFLAGS) $?
+-		@-mv `$(BASENAME) $@` $@ > /dev/null 2>&1
++		$(CC) -c $(CFLAGS) $? -o $@
++#		@-mv `$(BASENAME) $@` $@ > /dev/null 2>&1
  
  # Target rules
  
@@ -61,19 +88,37 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  		@-echo $(ROOT): Done.
  
  tst:		$(TST)/lin2cod $(TST)/cod2lin $(TOAST) $(TST)/test-result
-@@ -298,9 +300,10 @@
+@@ -298,24 +304,38 @@
  
  
  # The basic API: libgsm
-+$(LIBGSMSO):   $(LIB) $(GSM_OBJECTS)
-+		ld -o $@.1.0.10 -shared -soname libgsm.so.1 $(GSM_OBJECTS)
++#$(LIBGSMSO):   $(LIB) $(GSM_OBJECTS)
++#		ld -o $@.1.0.10 -shared -soname libgsm.so.1 $(GSM_OBJECTS)
  
  $(LIBGSM):	$(LIB) $(GSM_OBJECTS)
 -		-rm $(RMFLAGS) $(LIBGSM)
  		$(AR) $(ARFLAGS) $(LIBGSM) $(GSM_OBJECTS)
  		$(RANLIB) $(LIBGSM)
  
-@@ -311,11 +314,9 @@
+ 
++shared:
++		mkdir shared
++
++shared/%.o:
++		$(CC) -c $(CFLAGS) $(PICFLAGS) -o $@ $(addprefix $(SRC)/,$(patsubst %.o,%.c,$(@F))) 
++
++#libgsm.so.2: shared $(GSM_SHOBJECTS)
++#		echo $(GSM_SHOBJECTS)
++#		cd shared; $(CC) -shared -Wl -soname libgsm.so.2 -o libgsm.so.2.0 *.o
++
++$(LIBGSMSO): shared $(GSM_SHOBJECTS)		
++		cd shared; ld -o ../lib/libgsm.so.1.0.10 -shared -soname libgsm.so.1 *.o
++		strip --strip-unneeded $(LIBGSMSO).1.0.10
++
++
+ # Toast, Untoast and Tcat -- the compress-like frontends to gsm.
+ 
+ $(TOAST):	$(BIN) $(TOAST_OBJECTS) $(LIBGSM)
  		$(LD) $(LFLAGS) -o $(TOAST) $(TOAST_OBJECTS) $(LIBGSM) $(LDLIB)
  
  $(UNTOAST):	$(BIN) $(TOAST)
@@ -85,7 +130,7 @@ diff -ruN gsm-1.0-pl10.orig/Makefile gsm-1.0-pl10/Makefile
  		$(LN) $(TOAST) $(TCAT)
  
  
-@@ -351,53 +352,47 @@
+@@ -351,53 +371,47 @@
  		fi
  
  $(TOAST_INSTALL_BIN)/toast:	$(TOAST)
