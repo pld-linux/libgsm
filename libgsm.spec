@@ -5,7 +5,7 @@ Summary(ru):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk):	Б╕бл╕отека ауд╕о кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.10
-Release:	8
+Release:	9
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
