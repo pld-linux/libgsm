@@ -9,6 +9,8 @@ Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-makefile-2.patch
+Patch2:		%{name}-makefile-3.patch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -42,10 +44,13 @@ GSM Audio Encoding/decoding static library
 
 %prep
 %setup -q -n gsm-1.0-pl10
-%patch -p1
+%patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} OPTFLAGS="$RPM_OPT_FLAGS"
+
 
 %install
 rm -rf $RPM_BUILD_ROOT
