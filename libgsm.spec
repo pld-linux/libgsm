@@ -5,11 +5,12 @@ Summary(ru):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk):	Б╕бл╕отека ауд╕о кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.10
-Release:	7
+Release:	8
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	ftp://ftp.cs.tu-berlin.de/pub/local/kbs/tubmik/gsm/gsm-%{version}.tar.gz
 Patch0:		%{name}-makefile.patch
+URL:		http://kbs.cs.tu-berlin.de/~jutta/toast.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -112,7 +113,9 @@ Bibliotecas estАticas para desenvolvimento com libgsm
 %patch0 -p1
 
 %build
-%{__make} OPTFLAGS="%{rpmcflags}" WAV49="-DWAV49"
+%{__make} \
+	CC="%{__cc} -ansi -pedantic" \
+	OPTFLAGS="%{rpmcflags}" WAV49="-DWAV49"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -131,7 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT ChangeLog MACHINES MANIFEST README
+%doc COPYRIGHT ChangeLog MACHINES README
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_libdir}/libgsm.so.*.*
 %{_mandir}/man1/*
