@@ -1,7 +1,8 @@
 Summary:	GSM audio encoding/decoding library
+Summary(pl):	Biblioteka koduj±ca/dekoduj±ca d¼wiêk GSM
 Name:		libgsm
 Version:	1.0.10
-Release:	4
+Release:	5
 License:	Free/Copyright Technische Universitaet Berlin
 Vendor:		Tycho Softworks
 Group:		Libraries
@@ -20,8 +21,14 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is a free and public implementation of GSM audio encoding and
 decoding. The gsm library is used in many free software projects
 including 'rplay', but has never been packaged as a stand-alone shared
-libary. GSM encoding has specific uses in transmission of packetized
+library. GSM encoding has specific uses in transmission of packetized
 audio over the Internet.
+
+%description -l pl
+To jest darmowa implementacja kodowania i dekodowania d¼wiêku GSM.
+Biblioteka jest u¿ywana w wielu projektach, m.in. rplay. Kodowanie GSM
+ma specyficzne zastosowani przy transmisji pakietowanego d¼wiêku przez
+Internet.
 
 %package devel
 Summary:	Header files and development documentation for libgsm
@@ -39,6 +46,9 @@ Requires:	%{name} = %{version}
 %description devel
 Header files and development documentation for libgsm.
 
+%description devel -l pl
+Pliki nag³ówkowe i dokumentacja do libgsm.
+
 %package static
 Summary:	GSM Audio Encoding/decoding static library
 Summary(pl):	Statyczna biblioteka GSM Audio
@@ -55,13 +65,15 @@ Requires:	%{name}-devel = %{version}
 %description static
 GSM Audio Encoding/decoding static library.
 
+%description static -l pl
+Statyczna biblioteka GSM Audio.
+
 %prep
 %setup -q -n gsm-1.0-pl10
 %patch0 -p1
 
 %build
 %{__make} OPTFLAGS="%{rpmcflags}" WAV49="-DWAV49"
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
