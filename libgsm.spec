@@ -5,12 +5,13 @@ Summary(ru):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk):	Б╕бл╕отека ауд╕о кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.11
-Release:	1
+Release:	2
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	http://kbs.cs.tu-berlin.de/~jutta/gsm/gsm-%{version}.tar.gz
 # Source0-md5:	d09e9f0407ac8a18e04a9e973f8d7132
 Patch0:		%{name}-makefile.patch
+Patch1:		%{name}-c++.patch
 URL:		http://kbs.cs.tu-berlin.de/~jutta/toast.html
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -112,6 +113,7 @@ Bibliotecas estАticas para desenvolvimento com libgsm
 %prep
 %setup -q -n gsm-1.0-pl11
 %patch0 -p1
+%patch1 -p1
 rm -f bin/* lib/* shared/* src/*.o test/*.o
 
 %build
