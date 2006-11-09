@@ -66,7 +66,7 @@ Summary(pt_BR):	Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM - arquivos 
 Summary(ru):	Файлы для разработки с использованием библиотеки libgsm
 Summary(uk):	Файли для розробки з використанням б╕бл╕отеки libgsm
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files and development documentation for libgsm.
@@ -93,7 +93,7 @@ Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com a libgsm
 Summary(ru):	Статические библиотеки для разработки с использованием libgsm
 Summary(uk):	Статичн╕ б╕бл╕отеки для розробки з використанням libgsm
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 GSM Audio Encoding/decoding static library.
