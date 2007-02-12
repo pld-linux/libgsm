@@ -1,8 +1,8 @@
 Summary:	GSM audio encoding/decoding library
-Summary(pl):	Biblioteka koduj╠ca/dekoduj╠ca d╪wiЙk GSM
-Summary(pt_BR):	Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM
-Summary(ru):	Библиотека аудио кодирования/декодирования GSM
-Summary(uk):	Б╕бл╕отека ауд╕о кодування/декодування GSM
+Summary(pl.UTF-8):   Biblioteka kodujд┘ca/dekodujд┘ca dе╨wiд≥k GSM
+Summary(pt_BR.UTF-8):   Biblioteca de codificaц╖цёo/decodificaц╖цёo de ц║udio GSM
+Summary(ru.UTF-8):   п▒п╦п╠п╩п╦п╬я┌п╣п╨п╟ п╟я┐п╢п╦п╬ п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐/п╢п╣п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐ GSM
+Summary(uk.UTF-8):   п▒я√п╠п╩я√п╬я┌п╣п╨п╟ п╟я┐п╢я√п╬ п╨п╬п╢я┐п╡п╟п╫п╫я▐/п╢п╣п╨п╬п╢я┐п╡п╟п╫п╫я▐ GSM
 Name:		libgsm
 Version:	1.0.12
 Release:	1
@@ -30,85 +30,85 @@ of the algorithm is good enough for reliable speaker recognition; even
 music often survives transcoding in recognizable form (given the
 bandwidth limitations of 8 kHz sampling rate).
 
-%description -l pl
-To jest darmowa implementacja kodowania i dekodowania d╪wiЙku GSM.
-Biblioteka jest u©ywana w wielu projektach, m.in. rplay. Kodowanie GSM
-ma specyficzne zastosowani przy transmisji pakietowanego d╪wiЙku przez
+%description -l pl.UTF-8
+To jest darmowa implementacja kodowania i dekodowania dе╨wiд≥ku GSM.
+Biblioteka jest uе╪ywana w wielu projektach, m.in. rplay. Kodowanie GSM
+ma specyficzne zastosowani przy transmisji pakietowanego dе╨wiд≥ku przez
 Internet.
 
 GSM 06.10 dokonuje kompresji ramek 160 13-bitowych sampli (o
-o╤miokilohercowej czЙstotliwo╤ci prСbkowania, czyli czЙstotliwo╤ci
-ramki 50 Hz) do 260 bitСw; aby zachowaФ kompatybilno╤Ф z typowymi
+oе⌡miokilohercowej czд≥stotliwoе⌡ci prцЁbkowania, czyli czд≥stotliwoе⌡ci
+ramki 50 Hz) do 260 bitцЁw; aby zachowaд┤ kompatybilnoе⌡д┤ z typowymi
 aplikacjami uniksowymi, nasza implementacja zamienia ramki 160
-16-bitowych linearnych sampli w 33-bajtowe ramki (1650 bajtСw/s).
-Algorytm jest na tyle dobry, ©e mo©na go wykorzystaФ do przekazywania
-mowy. Nawet muzyka czЙsto pomy╤lnie przechodzi proces kodowania
-(wzi╠wszy pod uwagЙ ograniczenia przepustowo╤ci osmiokilohercowej
-czЙstotliwo╤ci prСbkowania).
+16-bitowych linearnych sampli w 33-bajtowe ramki (1650 bajtцЁw/s).
+Algorytm jest na tyle dobry, е╪e moе╪na go wykorzystaд┤ do przekazywania
+mowy. Nawet muzyka czд≥sto pomyе⌡lnie przechodzi proces kodowania
+(wziд┘wszy pod uwagд≥ ograniczenia przepustowoе⌡ci osmiokilohercowej
+czд≥stotliwoе⌡ci prцЁbkowania).
 
-%description -l pt_BR
-Esta И uma implementaГЦo pЗblica e livre da codificaГЦo GSM. A
-biblioteca gsm И usada por muitos programas de livre distribuiГЦo,
+%description -l pt_BR.UTF-8
+Esta ц╘ uma implementaц╖цёo pц╨blica e livre da codificaц╖цёo GSM. A
+biblioteca gsm ц╘ usada por muitos programas de livre distribuiц╖цёo,
 entre eles o rplay.
 
-%description -l ru
-Это свободная реализация аудио кодирования/декодирования GSM.
-Кодирование GSM используется при передаче аудио через Интернет.
+%description -l ru.UTF-8
+п╜я┌п╬ я│п╡п╬п╠п╬п╢п╫п╟я▐ я─п╣п╟п╩п╦п╥п╟я├п╦я▐ п╟я┐п╢п╦п╬ п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐/п╢п╣п╨п╬п╢п╦я─п╬п╡п╟п╫п╦я▐ GSM.
+п п╬п╢п╦я─п╬п╡п╟п╫п╦п╣ GSM п╦я│п©п╬п╩я▄п╥я┐п╣я┌я│я▐ п©я─п╦ п©п╣я─п╣п╢п╟я┤п╣ п╟я┐п╢п╦п╬ я┤п╣я─п╣п╥ п≤п╫я┌п╣я─п╫п╣я┌.
 
-%description -l uk
-Це в╕льна реал╕зац╕я ауд╕о кодування/декодування GSM. Кодування GSM
-використову╓ться при передач╕ ауд╕о через ╤нтернет.
+%description -l uk.UTF-8
+п╕п╣ п╡я√п╩я▄п╫п╟ я─п╣п╟п╩я√п╥п╟я├я√я▐ п╟я┐п╢я√п╬ п╨п╬п╢я┐п╡п╟п╫п╫я▐/п╢п╣п╨п╬п╢я┐п╡п╟п╫п╫я▐ GSM. п п╬п╢я┐п╡п╟п╫п╫я▐ GSM
+п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я■я┌я▄я│я▐ п©я─п╦ п©п╣я─п╣п╢п╟я┤я√ п╟я┐п╢я√п╬ я┤п╣я─п╣п╥ п├п╫я┌п╣я─п╫п╣я┌.
 
 %package devel
 Summary:	Header files and development documentation for libgsm
-Summary(pl):	Pliki nagЁСwkowe i dokumentacja do libgsm
-Summary(pt_BR):	Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM - arquivos para desenvolvimento
-Summary(ru):	Файлы для разработки с использованием библиотеки libgsm
-Summary(uk):	Файли для розробки з використанням б╕бл╕отеки libgsm
+Summary(pl.UTF-8):   Pliki nagе┌цЁwkowe i dokumentacja do libgsm
+Summary(pt_BR.UTF-8):   Biblioteca de codificaц╖цёo/decodificaц╖цёo de ц║udio GSM - arquivos para desenvolvimento
+Summary(ru.UTF-8):   п╓п╟п╧п╩я▀ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ libgsm
+Summary(uk.UTF-8):   п╓п╟п╧п╩п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ libgsm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 Header files and development documentation for libgsm.
 
-%description devel -l pl
-Pliki nagЁСwkowe i dokumentacja do libgsm.
+%description devel -l pl.UTF-8
+Pliki nagе┌цЁwkowe i dokumentacja do libgsm.
 
-%description devel -l pt_BR
-Biblioteca de codificaГЦo/decodificaГЦo de Аudio GSM - arquivos para
+%description devel -l pt_BR.UTF-8
+Biblioteca de codificaц╖цёo/decodificaц╖цёo de ц║udio GSM - arquivos para
 desenvolvimento
 
-%description devel -l ru
-Этот пакет содержит файлы, необходимые для разработки программ с
-использованием библиотеки libgsm.
+%description devel -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ я│п╬п╢п╣я─п╤п╦я┌ я└п╟п╧п╩я▀, п╫п╣п╬п╠я┘п╬п╢п╦п╪я▀п╣ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪ я│
+п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ libgsm.
 
-%description devel -l uk
-Цей пакет м╕стить файли, необх╕дн╕ для розробки програм з
-використанням б╕бл╕отеки libgsm.
+%description devel -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╪я√я│я┌п╦я┌я▄ я└п╟п╧п╩п╦, п╫п╣п╬п╠я┘я√п╢п╫я√ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪ п╥
+п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ libgsm.
 
 %package static
 Summary:	GSM Audio Encoding/decoding static library
-Summary(pl):	Statyczna biblioteka GSM Audio
-Summary(pt_BR):	Bibliotecas estАticas para desenvolvimento com a libgsm
-Summary(ru):	Статические библиотеки для разработки с использованием libgsm
-Summary(uk):	Статичн╕ б╕бл╕отеки для розробки з використанням libgsm
+Summary(pl.UTF-8):   Statyczna biblioteka GSM Audio
+Summary(pt_BR.UTF-8):   Bibliotecas estц║ticas para desenvolvimento com a libgsm
+Summary(ru.UTF-8):   п║я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ libgsm
+Summary(uk.UTF-8):   п║я┌п╟я┌п╦я┤п╫я√ п╠я√п╠п╩я√п╬я┌п╣п╨п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ libgsm
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 GSM Audio Encoding/decoding static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka GSM Audio.
 
-%description static -l pt_BR
-Bibliotecas estАticas para desenvolvimento com libgsm
+%description static -l pt_BR.UTF-8
+Bibliotecas estц║ticas para desenvolvimento com libgsm
 
-%description static -l ru
-Этот пакет содержит статические библиотеки для разработки программ.
+%description static -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ я│п╬п╢п╣я─п╤п╦я┌ я│я┌п╟я┌п╦я┤п╣я│п╨п╦п╣ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╦ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪.
 
-%description static -l uk
-Цей пакет м╕стить статичн╕ б╕б╕л╕отеки для розробки програм.
+%description static -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╪я√я│я┌п╦я┌я▄ я│я┌п╟я┌п╦я┤п╫я√ п╠я√п╠я√п╩я√п╬я┌п╣п╨п╦ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪.
 
 %prep
 %setup -q -n gsm-1.0-pl12
