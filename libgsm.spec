@@ -1,8 +1,8 @@
 Summary:	GSM audio encoding/decoding library
-Summary(pl.UTF-8):   Biblioteka kodująca/dekodująca dźwięk GSM
-Summary(pt_BR.UTF-8):   Biblioteca de codificação/decodificação de áudio GSM
-Summary(ru.UTF-8):   Библиотека аудио кодирования/декодирования GSM
-Summary(uk.UTF-8):   Бібліотека аудіо кодування/декодування GSM
+Summary(pl.UTF-8):	Biblioteka kodująca/dekodująca dźwięk GSM
+Summary(pt_BR.UTF-8):	Biblioteca de codificação/decodificação de áudio GSM
+Summary(ru.UTF-8):	Библиотека аудио кодирования/декодирования GSM
+Summary(uk.UTF-8):	Бібліотека аудіо кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.12
 Release:	1
@@ -61,10 +61,10 @@ entre eles o rplay.
 
 %package devel
 Summary:	Header files and development documentation for libgsm
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokumentacja do libgsm
-Summary(pt_BR.UTF-8):   Biblioteca de codificação/decodificação de áudio GSM - arquivos para desenvolvimento
-Summary(ru.UTF-8):   Файлы для разработки с использованием библиотеки libgsm
-Summary(uk.UTF-8):   Файли для розробки з використанням бібліотеки libgsm
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do libgsm
+Summary(pt_BR.UTF-8):	Biblioteca de codificação/decodificação de áudio GSM - arquivos para desenvolvimento
+Summary(ru.UTF-8):	Файлы для разработки с использованием библиотеки libgsm
+Summary(uk.UTF-8):	Файли для розробки з використанням бібліотеки libgsm
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -88,10 +88,10 @@ desenvolvimento
 
 %package static
 Summary:	GSM Audio Encoding/decoding static library
-Summary(pl.UTF-8):   Statyczna biblioteka GSM Audio
-Summary(pt_BR.UTF-8):   Bibliotecas estáticas para desenvolvimento com a libgsm
-Summary(ru.UTF-8):   Статические библиотеки для разработки с использованием libgsm
-Summary(uk.UTF-8):   Статичні бібліотеки для розробки з використанням libgsm
+Summary(pl.UTF-8):	Statyczna biblioteka GSM Audio
+Summary(pt_BR.UTF-8):	Bibliotecas estáticas para desenvolvimento com a libgsm
+Summary(ru.UTF-8):	Статические библиотеки для разработки с использованием libgsm
+Summary(uk.UTF-8):	Статичні бібліотеки для розробки з використанням libgsm
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
