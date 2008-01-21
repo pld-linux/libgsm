@@ -5,7 +5,7 @@ Summary(ru.UTF-8):	Библиотека аудио кодирования/дек
 Summary(uk.UTF-8):	Бібліотека аудіо кодування/декодування GSM
 Name:		libgsm
 Version:	1.0.12
-Release:	1
+Release:	2
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	http://kbs.cs.tu-berlin.de/~jutta/gsm/gsm-%{version}.tar.gz
@@ -141,8 +141,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYRIGHT ChangeLog MACHINES README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/tcat
+%attr(755,root,root) %{_bindir}/toast
+%attr(755,root,root) %{_bindir}/untoast
 %attr(755,root,root) %{_libdir}/libgsm.so.*.*
+%ghost %attr(755,root,root) %{_libdir}/libgsm.so.?
 %{_mandir}/man1/*
 
 %files devel
