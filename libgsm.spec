@@ -146,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/toast
 %attr(755,root,root) %{_bindir}/untoast
 %attr(755,root,root) %{_libdir}/libgsm.so.*.*
-%ghost %attr(755,root,root) %{_libdir}/libgsm.so.?
+%attr(755,root,root) %ghost %{_libdir}/libgsm.so.?
 %{_mandir}/man1/*
 
 %files devel
