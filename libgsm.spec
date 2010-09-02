@@ -9,11 +9,11 @@ Version:	1.0.%{sver}
 Release:	1
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
-Source0:	http://kbs.cs.tu-berlin.de/~jutta/gsm/gsm-%{version}.tar.gz
+Source0:	http://www.quut.com/gsm/gsm-%{version}.tar.gz
 # Source0-md5:	c1ba392ce61dc4aff1c29ea4e92f6df4
 Patch0:		%{name}-makefile.patch
 Patch1:		%{name}-c++.patch
-URL:		http://kbs.cs.tu-berlin.de/~jutta/toast.html
+URL:		http://www.quut.com/gsm/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -145,15 +145,17 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tcat
 %attr(755,root,root) %{_bindir}/toast
 %attr(755,root,root) %{_bindir}/untoast
-%attr(755,root,root) %{_libdir}/libgsm.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgsm.so.?
-%{_mandir}/man1/*
+%attr(755,root,root) %{_libdir}/libgsm.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgsm.so.1
+%{_mandir}/man1/tcat.1*
+%{_mandir}/man1/toast.1*
+%{_mandir}/man1/untoast.1*
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgsm.so
-%{_includedir}/*
-%{_mandir}/man3/*
+%{_includedir}/gsm.h
+%{_mandir}/man3/gsm*.3*
 
 %files static
 %defattr(644,root,root,755)
