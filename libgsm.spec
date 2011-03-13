@@ -6,7 +6,7 @@ Summary(uk.UTF-8):	Бібліотека аудіо кодування/декод
 Name:		libgsm
 %define	sver	13
 Version:	1.0.%{sver}
-Release:	1
+Release:	2
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	http://www.quut.com/gsm/gsm-%{version}.tar.gz
