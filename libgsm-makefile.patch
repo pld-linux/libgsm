@@ -1,11 +1,11 @@
---- gsm-1.0-pl10/Makefile.wiget	Tue Jul  2 16:36:06 1996
-+++ gsm-1.0-pl10/Makefile	Tue Aug 29 13:37:15 2000
+--- gsm-1.0-pl17/Makefile.orig	2017-06-28 02:24:24.000000000 +0200
++++ gsm-1.0-pl17/Makefile	2017-07-16 17:50:06.936841632 +0200
 @@ -44,7 +44,7 @@
  # CCFLAGS 	= -c -O
  
  CC		= gcc -ansi -pedantic
--CCFLAGS 	= -c -O2 -DNeedFunctionPrototypes=1
-+CCFLAGS 	= $(OPTFLAGS) -DNeedFunctionPrototypes=1
+-CCFLAGS 	= -c -O2 -DNeedFunctionPrototypes=1 -Wall -Wno-comment
++CCFLAGS 	= $(OPTFLAGS) -DNeedFunctionPrototypes=1 -Wall -Wno-comment
  
  LD 		= $(CC)
  
@@ -129,7 +129,7 @@
  		$(LN) $(TOAST) $(TCAT)
  
  
-@@ -351,53 +371,47 @@
+@@ -351,53 +370,47 @@
  		fi
  
  $(TOAST_INSTALL_BIN)/toast:	$(TOAST)
@@ -142,10 +142,9 @@
 -		ln $? $@
 +		ln -sf toast $@
  
--$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
+ $(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
 -		-rm $@
 -		ln $? $@
-+$(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
 +		ln -sf toast $@
  
  $(TOAST_INSTALL_MAN)/toast.1:	$(MAN)/toast.1
