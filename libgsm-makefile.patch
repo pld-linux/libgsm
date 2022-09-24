@@ -1,6 +1,6 @@
---- gsm-1.0-pl17/Makefile.orig	2017-06-28 02:24:24.000000000 +0200
-+++ gsm-1.0-pl17/Makefile	2017-07-16 17:50:06.936841632 +0200
-@@ -44,7 +44,7 @@
+--- gsm-1.0-pl22/Makefile.orig	2022-08-04 20:46:46.107815841 +0200
++++ gsm-1.0-pl22/Makefile	2022-09-24 10:52:16.384400274 +0200
+@@ -44,7 +44,7 @@ WAV49	= -DWAV49
  # CCFLAGS 	= -c -O
  
  CC		= gcc -ansi -pedantic
@@ -9,7 +9,7 @@
  
  LD 		= $(CC)
  
-@@ -64,6 +64,7 @@
+@@ -64,6 +64,7 @@ LD 		= $(CC)
  # LDLIB	= -lgcc
  ######### Additional libraries needed by $(LD)
  
@@ -17,7 +17,7 @@
  
  # Where do you want to install libraries, binaries, a header file
  # and the manual pages?
-@@ -78,10 +79,10 @@
+@@ -78,10 +79,10 @@ INSTALL_ROOT	=
  # Leave GSM_INSTALL_ROOT empty to not install the GSM library outside of
  # this directory.
  
@@ -31,7 +31,7 @@
  
  
  # Where do you want to install the toast binaries and their manpage?
-@@ -89,12 +90,13 @@
+@@ -89,12 +90,13 @@ GSM_INSTALL_MAN = $(GSM_INSTALL_ROOT)/ma
  # Leave TOAST_INSTALL_ROOT empty to not install the toast binaries outside
  # of this directory.
  
@@ -47,15 +47,17 @@
  SHELL		= /bin/sh
  LN		= ln
  BASENAME 	= basename
-@@ -140,6 +142,7 @@
+@@ -140,6 +142,9 @@ LFLAGS	= $(LDFLAGS) $(LDINC)
  # Targets
  
  LIBGSM	= $(LIB)/libgsm.a
 +LIBGSMSO= $(LIB)/libgsm.so
++SOMAJOR	= .1
++SOVER	= .1.0.22
  
  TOAST	= $(BIN)/toast
  UNTOAST	= $(BIN)/untoast
-@@ -222,6 +225,8 @@
+@@ -222,6 +227,8 @@ GSM_OBJECTS =	$(SRC)/add.o		\
  		$(SRC)/short_term.o	\
  		$(SRC)/table.o
  
@@ -64,22 +66,21 @@
  TOAST_OBJECTS =	$(SRC)/toast.o 		\
  		$(SRC)/toast_lin.o	\
  		$(SRC)/toast_ulaw.o	\
-@@ -258,6 +263,7 @@
+@@ -258,6 +265,7 @@ STUFF = 	ChangeLog			\
  
  GSM_INSTALL_TARGETS =	\
  		$(GSM_INSTALL_LIB)/libgsm.a		\
-+		$(GSM_INSTALL_LIB)/libgsm.so.1.0.10	\
++		$(GSM_INSTALL_LIB)/libgsm.so$(SOVER)	\
  		$(GSM_INSTALL_INC)/gsm.h		\
  		$(GSM_INSTALL_MAN)/gsm.3		\
  		$(GSM_INSTALL_MAN)/gsm_explode.3	\
-@@ -274,12 +280,12 @@
+@@ -274,12 +282,11 @@ TOAST_INSTALL_TARGETS =	\
  # Default rules
  
  .c.o:
 -		$(CC) $(CFLAGS) $?
 -		@-mv `$(BASENAME) $@` $@ > /dev/null 2>&1
 +		$(CC) -c $(CFLAGS) $? -o $@
-+#		@-mv `$(BASENAME) $@` $@ > /dev/null 2>&1
  
  # Target rules
  
@@ -88,104 +89,116 @@
  		@-echo $(ROOT): Done.
  
  tst:		$(TST)/lin2cod $(TST)/cod2lin $(TOAST) $(TST)/test-result
-@@ -298,24 +304,37 @@
+@@ -298,34 +305,39 @@ install:	toastinstall gsminstall
  
  
  # The basic API: libgsm
-+#$(LIBGSMSO):   $(LIB) $(GSM_OBJECTS)
-+#		ld -o $@.1.0.10 -shared -soname libgsm.so.1 $(GSM_OBJECTS)
- 
- $(LIBGSM):	$(LIB) $(GSM_OBJECTS)
+-
+-$(LIBGSM):	$(LIB) $(GSM_OBJECTS)
 -		-rm $(RMFLAGS) $(LIBGSM)
++$(LIBGSM):	lib.stamp $(GSM_OBJECTS)
  		$(AR) $(ARFLAGS) $(LIBGSM) $(GSM_OBJECTS)
  		$(RANLIB) $(LIBGSM)
  
++shared.stamp:
++		mkdir -p shared && touch shared.stamp
++
++shared/%.o: $(SRC)/%.c shared.stamp
++		$(CC) -c $(CFLAGS) $(PICFLAGS) -o $@ $(addprefix $(SRC)/,$(patsubst %.o,%.c,$(@F)))
++
++$(LIBGSMSO): lib.stamp $(GSM_SHOBJECTS)
++		$(CC) -o $(LIB)/libgsm.so$(SOVER) -shared -Wl,-soname=libgsm.so$(SOMAJOR) $(GSM_SHOBJECTS)
++
  
-+shared:
-+		mkdir shared
-+
-+shared/%.o:
-+		$(CC) -c $(CFLAGS) $(PICFLAGS) -o $@ $(addprefix $(SRC)/,$(patsubst %.o,%.c,$(@F))) 
-+
-+#libgsm.so.2: shared $(GSM_SHOBJECTS)
-+#		echo $(GSM_SHOBJECTS)
-+#		cd shared; $(CC) -shared -Wl -soname libgsm.so.2 -o libgsm.so.2.0 *.o
-+
-+$(LIBGSMSO): shared $(GSM_SHOBJECTS)		
-+		cd shared; $(CC) -o ../lib/libgsm.so.1.0.10 -shared -Wl,-soname=libgsm.so.1 *.o
-+
-+
  # Toast, Untoast and Tcat -- the compress-like frontends to gsm.
  
- $(TOAST):	$(BIN) $(TOAST_OBJECTS) $(LIBGSM)
+-$(TOAST):	$(BIN) $(TOAST_OBJECTS) $(LIBGSM)
++$(TOAST):	bin.stamp $(TOAST_OBJECTS) $(LIBGSM)
  		$(LD) $(LFLAGS) -o $(TOAST) $(TOAST_OBJECTS) $(LIBGSM) $(LDLIB)
  
- $(UNTOAST):	$(BIN) $(TOAST)
+-$(UNTOAST):	$(BIN) $(TOAST)
 -		-rm $(RMFLAGS) $(UNTOAST)
++$(UNTOAST):	bin.stamp $(TOAST)
  		$(LN) $(TOAST) $(UNTOAST)
  
- $(TCAT):	$(BIN) $(TOAST)
+-$(TCAT):	$(BIN) $(TOAST)
 -		-rm $(RMFLAGS) $(TCAT)
++$(TCAT):	bin.stamp $(TOAST)
  		$(LN) $(TOAST) $(TCAT)
  
  
-@@ -351,53 +370,47 @@
+ # The local bin and lib directories
+ 
+-$(BIN):
+-		if [ ! -d $(BIN) ] ; then mkdir $(BIN) ; fi
++bin.stamp:
++		if [ ! -d $(BIN) ] ; then mkdir $(BIN) ; fi && touch bin.stamp
+ 
+-$(LIB):
+-		if [ ! -d $(LIB) ] ; then mkdir $(LIB) ; fi
++lib.stamp:
++		if [ ! -d $(LIB) ] ; then mkdir $(LIB) ; fi && touch lib.stamp
+ 
+ 
+ # Installation
+@@ -351,53 +363,47 @@ toastuninstall:
  		fi
  
  $(TOAST_INSTALL_BIN)/toast:	$(TOAST)
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $(TOAST) $@
  		chmod 755 $@
  
  $(TOAST_INSTALL_BIN)/untoast:	$(TOAST_INSTALL_BIN)/toast
--		-rm $@
--		ln $? $@
-+		ln -sf toast $@
+-		-rm $(RMFLAGS) $@
+-		$(LN) $? $@
++		$(LN) -sf toast $@
  
  $(TOAST_INSTALL_BIN)/tcat:	$(TOAST_INSTALL_BIN)/toast
--		-rm $@
--		ln $? $@
-+		ln -sf toast $@
+-		-rm $(RMFLAGS) $@
+-		$(LN) $? $@
++		$(LN) -sf toast $@
  
  $(TOAST_INSTALL_MAN)/toast.1:	$(MAN)/toast.1
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm.3:	$(MAN)/gsm.3
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_option.3:	$(MAN)/gsm_option.3
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_explode.3:	$(MAN)/gsm_explode.3
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_MAN)/gsm_print.3:	$(MAN)/gsm_print.3
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_INC)/gsm.h:	$(INC)/gsm.h
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
  
  $(GSM_INSTALL_LIB)/libgsm.a:	$(LIBGSM)
--		-rm $@
+-		-rm $(RMFLAGS) $@
  		cp $? $@
  		chmod 444 $@
- 
-+$(GSM_INSTALL_LIB)/libgsm.so.1.0.10: $(LIBGSMSO).1.0.10
-+		cp $? $@
-+		ln -sf libgsm.so.1.0.10 $(GSM_INSTALL_LIB)/libgsm.so.1
-+		ln -sf libgsm.so.1.0.10 $(GSM_INSTALL_LIB)/libgsm.so
+-
++
++$(GSM_INSTALL_LIB)/libgsm.so$(SOVER): $(LIBGSMSO)$(SOVER)
++		install -m755 $? $@
++		ln -sf libgsm.so$(SOVER) $(GSM_INSTALL_LIB)/libgsm.so$(SOMAJOR)
++		ln -sf libgsm.so$(SOVER) $(GSM_INSTALL_LIB)/libgsm.so
  
  # Distribution
  

@@ -4,16 +4,15 @@ Summary(pt_BR.UTF-8):	Biblioteca de codificação/decodificação de áudio GSM
 Summary(ru.UTF-8):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk.UTF-8):	Бібліотека аудіо кодування/декодування GSM
 Name:		libgsm
-%define	sver	19
+%define	sver	22
 Version:	1.0.%{sver}
 Release:	1
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
-Source0:	http://www.quut.com/gsm/gsm-%{version}.tar.gz
-# Source0-md5:	36cca922928d68fa5fa53996c62f5854
+Source0:	https://www.quut.com/gsm/gsm-%{version}.tar.gz
+# Source0-md5:	fcca74c770a341d78ea4604418c1264b
 Patch0:		%{name}-makefile.patch
-Patch1:		%{name}-c++.patch
-URL:		http://www.quut.com/gsm/
+URL:		https://www.quut.com/gsm/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -114,12 +113,13 @@ Bibliotecas estáticas para desenvolvimento com libgsm
 %prep
 %setup -q -n gsm-1.0-pl%{sver}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__make} \
 	CC="%{__cc} -ansi -pedantic" \
-	OPTFLAGS="%{rpmcflags}" WAV49="-DWAV49"
+	LDFLAGS="%{rpmldflags} %{rpmcflags}" \
+	OPTFLAGS="%{rpmcflags} %{rpmcppflags}" \
+	WAV49="-DWAV49"
 
 %install
 rm -rf $RPM_BUILD_ROOT
