@@ -112,7 +112,7 @@ Bibliotecas estáticas para desenvolvimento com libgsm
 
 %prep
 %setup -q -n gsm-1.0-pl%{sver}
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 %{__make} \
