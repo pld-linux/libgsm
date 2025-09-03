@@ -4,13 +4,13 @@ Summary(pt_BR.UTF-8):	Biblioteca de codificação/decodificação de áudio GSM
 Summary(ru.UTF-8):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk.UTF-8):	Бібліотека аудіо кодування/декодування GSM
 Name:		libgsm
-%define	sver	22
+%define	sver	23
 Version:	1.0.%{sver}
 Release:	1
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	https://www.quut.com/gsm/gsm-%{version}.tar.gz
-# Source0-md5:	fcca74c770a341d78ea4604418c1264b
+# Source0-md5:	fc625564fb388b98ac195301e75d7404
 Patch0:		%{name}-makefile.patch
 URL:		https://www.quut.com/gsm/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
