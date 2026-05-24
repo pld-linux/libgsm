@@ -4,13 +4,13 @@ Summary(pt_BR.UTF-8):	Biblioteca de codificação/decodificação de áudio GSM
 Summary(ru.UTF-8):	Библиотека аудио кодирования/декодирования GSM
 Summary(uk.UTF-8):	Бібліотека аудіо кодування/декодування GSM
 Name:		libgsm
-%define	sver	23
+%define	sver	24
 Version:	1.0.%{sver}
 Release:	1
 License:	Free (Copyright (C) Technische Universitaet Berlin)
 Group:		Libraries
 Source0:	https://www.quut.com/gsm/gsm-%{version}.tar.gz
-# Source0-md5:	fc625564fb388b98ac195301e75d7404
+# Source0-md5:	c13a7e1c5f826e9dbaa71db19e7ebfae
 Patch0:		%{name}-makefile.patch
 URL:		https://www.quut.com/gsm/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -144,15 +144,15 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tcat
 %attr(755,root,root) %{_bindir}/toast
 %attr(755,root,root) %{_bindir}/untoast
-%attr(755,root,root) %{_libdir}/libgsm.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libgsm.so.1
+%{_libdir}/libgsm.so.*.*.*
+%ghost %{_libdir}/libgsm.so.1
 %{_mandir}/man1/tcat.1*
 %{_mandir}/man1/toast.1*
 %{_mandir}/man1/untoast.1*
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libgsm.so
+%{_libdir}/libgsm.so
 %{_includedir}/gsm.h
 %{_mandir}/man3/gsm*.3*
 
